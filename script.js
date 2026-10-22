@@ -1,6 +1,6 @@
 /* =========================================================
    내만세(내가 만드는 세상) script.js
-   순서: 5주차(알림 신청) → 6주차(테마·탭·안전 수칙) → 7주차(제작 신청 흐름)
+   순서: 5주차(알림 신청) → 6주차(테마·탭·소요시간 동의) → 7주차(제작 신청 흐름)
    ========================================================= */
 
 /* ---------------------------------------------------------
@@ -53,7 +53,9 @@ const themeButton = document.querySelector("#themeButton");
 function handleThemeClick() {
   const isDark = document.body.classList.toggle("dark");
 
-  themeButton.textContent = isDark ? "밝은 화면으로" : "어두운 화면으로";
+  themeButton.textContent = isDark
+    ? "너무 어둡다면 밝은 화면으로 전환."
+    : "너무 밝다면 어두운 화면으로 전환.";
   themeButton.setAttribute("aria-pressed", String(isDark));
 }
 
@@ -100,7 +102,7 @@ tabs.forEach(function (tab) {
 
 
 /* ---------------------------------------------------------
-   6주차 · change: 안전 수칙 확인 → 시작 버튼 활성화
+   6주차 · change: 소요시간 변동 동의 → 시작 버튼 활성화
    --------------------------------------------------------- */
 const agreeCheck = document.querySelector("#agreeCheck");
 const agreeMessage = document.querySelector("#agreeMessage");
@@ -111,8 +113,8 @@ function handleAgreeChange() {
 
   startButton.disabled = !agreed;
   agreeMessage.textContent = agreed
-    ? "확인했습니다. 제작 신청을 시작할 수 있습니다."
-    : "안전 수칙을 확인해야 제작 신청을 시작할 수 있습니다.";
+    ? "동의하셨습니다. 제작 신청을 시작할 수 있습니다."
+    : "동의하셔야 제작 신청을 진행할 수 있습니다.";
   agreeMessage.classList.toggle("is-ready", agreed);
 }
 
@@ -121,7 +123,7 @@ agreeCheck.addEventListener("change", handleAgreeChange);
 
 /* ---------------------------------------------------------
    7주차 · 제작 신청 흐름
-   진입 → 1 만들 것 → 2 재료·수령 → 3 내용 확인 → (팝업) → 4 완료
+   진입 → 1 만들 것 → 2 재료·수령(보관·방문·택배) → 3 내용 확인 → (팝업) → 4 완료
    --------------------------------------------------------- */
 
 // 1) 흐름에서 쓰는 요소 찾기
@@ -144,6 +146,9 @@ const pickup = document.querySelector("#pickup");
 const visitDateField = document.querySelector("#visitDateField");
 const visitDate = document.querySelector("#visitDate");
 const dateError = document.querySelector("#dateError");
+const deliveryField = document.querySelector("#deliveryField");
+const deliveryAddress = document.querySelector("#deliveryAddress");
+const addressError = document.querySelector("#addressError");
 
 const printSummary = document.querySelector("#printSummary");
 const confirmDialog = document.querySelector("#confirmDialog");
@@ -160,9 +165,12 @@ const purposeGuides = {
   startup: "시제품을 주변 사람 다섯 명에게 써 보게 하고 반응을 기록해 보세요. 다음 버전의 출발점이 됩니다."
 };
 
+// 페이지를 처음 열었을 때의 재료 안내 문구 (다시 시작할 때 되돌림)
+const materialHelpDefault = materialHelp.textContent;
+
 const materialGuides = {
-  pla: "대부분 하루 안에 완성됩니다.",
-  tpu: "제작 속도가 느려 하루가 더 걸릴 수 있습니다.",
+  pla: "크기에 따라 제작 시간이 달라집니다.",
+  tpu: "제작 속도가 느려 하루 이상 걸릴 수 있습니다.",
   resin: "세척·경화 후처리 때문에 하루가 더 걸립니다."
 };
 
@@ -204,7 +212,7 @@ function clearError(input, errorBox) {
   input.removeAttribute("aria-invalid");
 }
 
-// 4) 진입: 안전 수칙 확인 후 시작 버튼을 누르면 1단계 열기
+// 4) 진입: 소요시간 변동에 동의한 뒤 시작 버튼을 누르면 1단계 열기
 function handleStartClick() {
   printFlow.hidden = false;
   showStep(1);
@@ -284,17 +292,30 @@ function handleMaterialChange() {
 
 function handlePickupChange() {
   const isVisit = pickup.value === "visit";
-  visitDateField.hidden = !isVisit;
+  const isDelivery = pickup.value === "delivery";
 
-  // 사물함을 고르면 숨겨진 날짜는 비우고 검사하지 않습니다.
+  // 고른 방법에 필요한 입력칸만 보여 줍니다.
+  visitDateField.hidden = !isVisit;
+  deliveryField.hidden = !isDelivery;
+
+  // 숨겨진 입력칸은 비우고 검사하지 않습니다.
   if (!isVisit) {
     visitDate.value = "";
     clearError(visitDate, dateError);
+  }
+  if (!isDelivery) {
+    deliveryAddress.value = "";
+    clearError(deliveryAddress, addressError);
   }
 }
 
 material.addEventListener("change", handleMaterialChange);
 pickup.addEventListener("change", handlePickupChange);
+deliveryAddress.addEventListener("input", function () {
+  if (deliveryAddress.value.trim() !== "") {
+    clearError(deliveryAddress, addressError);
+  }
+});
 visitDate.addEventListener("change", function () {
   if (visitDate.value !== "") {
     clearError(visitDate, dateError);
@@ -303,6 +324,7 @@ visitDate.addEventListener("change", function () {
 
 // 8) 2단계 → 3단계: 직접 수령일 때만 날짜 검사
 function handleNext2() {
+  // 직접 수령: 날짜 검사
   if (pickup.value === "visit") {
     if (visitDate.value === "") {
       showError(visitDate, dateError, "결과물을 받으러 올 날짜를 골라 주세요.");
@@ -316,7 +338,23 @@ function handleNext2() {
     }
   }
 
+  // 택배: 주소 검사
+  if (pickup.value === "delivery") {
+    const address = deliveryAddress.value.trim();
+    if (address === "") {
+      showError(deliveryAddress, addressError, "택배를 받을 주소를 입력해 주세요.");
+      deliveryAddress.focus();
+      return;
+    }
+    if (address.length < 8) {
+      showError(deliveryAddress, addressError, "동·호수 같은 상세 주소까지 함께 적어 주세요.");
+      deliveryAddress.focus();
+      return;
+    }
+  }
+
   clearError(visitDate, dateError);
+  clearError(deliveryAddress, addressError);
   showSummary();
   showStep(3);
 }
@@ -333,9 +371,13 @@ function addSummaryRow(term, value) {
 }
 
 function getPickupText() {
-  return pickup.value === "visit"
-    ? "직접 수령 · " + visitDate.value + " 방문"
-    : "사물함 보관";
+  if (pickup.value === "visit") {
+    return "직접 수령 · " + visitDate.value + " 방문";
+  }
+  if (pickup.value === "delivery") {
+    return "택배 · " + deliveryAddress.value.trim();
+  }
+  return "보관 후 아무 때나 찾아가기";
 }
 
 function showSummary() {
@@ -374,9 +416,14 @@ function handleConfirmOk() {
   const ticketNumber = Math.floor(1000 + Math.random() * 9000);
   printTicket.textContent = "NM-" + ticketNumber;
 
-  doneGuide.textContent = pickup.value === "visit"
-    ? visitDate.value + "에 학생증을 들고 메이커스페이스로 오세요."
-    : "완성되면 사물함 번호와 비밀번호를 이메일로 보내 드립니다.";
+  // 수령 방법에 따라 다음 행동을 안내합니다.
+  if (pickup.value === "visit") {
+    doneGuide.textContent = visitDate.value + "에 접수 번호를 가지고 방문해 주세요.";
+  } else if (pickup.value === "delivery") {
+    doneGuide.textContent = "완성되면 입력한 주소로 택배를 보내 드립니다. 배송 문의는 접수 번호로 해 주세요.";
+  } else {
+    doneGuide.textContent = "완성되면 알려 드립니다. 접수 번호를 가지고 편한 때에 찾아가세요.";
+  }
 
   // 제작 용도에 따라 다음 행동을 다르게 안내합니다.
   purposeGuide.textContent = purposeGuides[purpose.value];
@@ -395,15 +442,18 @@ function handleRestart() {
   nameCount.textContent = "0 / 10";
 
   material.value = "pla";
-  materialHelp.textContent = materialGuides.pla;
+  materialHelp.textContent = materialHelpDefault;
   pickup.value = "locker";
   visitDate.value = "";
   visitDateField.hidden = true;
+  deliveryAddress.value = "";
+  deliveryField.hidden = true;
 
   clearError(modelName, modelError);
   clearError(purpose, purposeError);
   clearError(requesterName, nameError);
   clearError(visitDate, dateError);
+  clearError(deliveryAddress, addressError);
 
   printSummary.textContent = "";
   printTicket.textContent = "";
