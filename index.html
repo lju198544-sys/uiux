@@ -199,7 +199,7 @@
           </div>
         </div>
 
-        <!-- 2단계: 선택  -->
+        <!-- 선택  -->
         <div class="print-step" data-step="2" hidden>
           <h4>재료와 받을 방법을 골라 주세요</h4>
 
@@ -214,7 +214,7 @@
           <label for="pickup">수령 방법</label>
           <select id="pickup">
             <option value="locker">보관 · 아무 때나 찾아가기</option>
-            <option value="visit">직접 수령 · 방문</option>
+            <option value="visit">추후 일정에 직접 수령 · 방문</option>
           </select>
 
           <div id="visitDateField" hidden>
@@ -229,7 +229,7 @@
           </div>
         </div>
 
-        <!-- 3단계: 확인 -->
+        <!-- 확인 -->
         <div class="print-step" data-step="3" hidden>
           <h4>신청 내용을 확인해 주세요</h4>
           <dl id="printSummary" class="summary-list"></dl>
@@ -240,7 +240,7 @@
           </div>
         </div>
 
-        <!-- 4단계: 완료 -->
+        <!-- 완료 -->
         <div class="print-step print-done" data-step="4" hidden>
           <h4 id="doneTitle" tabindex="-1">제작 신청이 접수되었습니다</h4>
           <p>접수 번호 <strong id="printTicket"></strong></p>
@@ -264,7 +264,7 @@
       </section>
     </section>
 
-    <!-- 2·3·5주차: 완료 알림 받기 (submit) -->
+    <!-- 완료 알림 받기 (submit) -->
     <section id="subscribe" class="content-section subscribe-section">
       <h2>제작 완료 알림 받기</h2>
       <form id="subscribe-form" class="subscribe-form" novalidate>
