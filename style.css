@@ -1,5 +1,5 @@
 /* =========================================================
-   레이어랩 style.css
+   내만세(내가 만드는 세상) style.css
    3주차: 위계·그룹·상태   4주차: 유동 너비·Grid·768px
    6주차: 테마·탭·상태     7주차: 신청 흐름·오류·완료
    ========================================================= */
@@ -51,6 +51,7 @@ body {
   font-family: "IBM Plex Sans KR", "Noto Sans KR", Arial, sans-serif;
   font-size: 17px;
   line-height: 1.65;
+  word-break: keep-all;
   background-color: var(--paper);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -102,6 +103,13 @@ h4 { margin-bottom: 16px; font-size: 19px; line-height: 1.4; }
   font-size: 20px;
   font-weight: 700;
   color: var(--primary);
+}
+
+.brand-sub {
+  margin-left: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .theme-button {
@@ -473,6 +481,16 @@ select {
 
 select + .field-help {
   margin-top: 8px;
+}
+
+#purposeGuide {
+  padding: 12px;
+  border-left: 4px solid var(--filament);
+  background-color: var(--surface);
+}
+
+#purposeGuide:empty {
+  display: none;
 }
 
 .char-count {

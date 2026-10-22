@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>레이어랩 | 캠퍼스 3D 프린터 출력 신청</title>
+  <title>내만세 | 내가 만드는 세상, 캠퍼스 메이커 제작 신청</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
@@ -11,15 +11,15 @@
 </head>
 <body>
   <!--
-  사용자: 과제·작품용 출력물이 필요하지만 3D 프린터가 없는 대학생
-  목적: 학교 메이커스페이스 3D 프린터에 출력을 맡기는 방법과 조건을 이해한다.
-  핵심 행동: 안전 수칙을 확인하고 출력 신청을 시작부터 완료까지 마친다.
-  정보 순서: 서비스 소개 → 주요 기능 → 재료 안내 → 이용 방법 → 출력 신청 → 완료 알림 받기
+  사용자: 아이디어를 실물로 만들어 보고 싶지만 장비와 비용이 부담되는 대학생 (과제·공모전·창업 준비)
+  목적: 학교 메이커스페이스를 '내 작은 공장'처럼 활용해 아이디어를 시제품으로 만드는 방법을 이해한다.
+  핵심 행동: 안전 수칙을 확인하고 제작 신청을 시작부터 완료까지 마친다.
+  정보 순서: 서비스 소개 → 주요 기능 → 재료 안내 → 이용 방법 → 제작 신청 → 완료 알림 받기
   -->
 
   <header class="site-header">
     <div class="header-top">
-      <p class="brand">레이어랩</p>
+      <p class="brand">내만세 <span class="brand-sub">내가 만드는 세상</span></p>
       <button id="themeButton" class="theme-button" type="button" aria-pressed="false">
         어두운 화면으로
       </button>
@@ -27,14 +27,14 @@
 
     <div class="header-layout">
       <div class="header-text">
-        <h1>프린터가 없어도<br>내 모델은 출력된다</h1>
+        <h1>아이디어는 내가,<br>생산은 캠퍼스가</h1>
         <p class="header-description">
-          학교 메이커스페이스의 3D 프린터에 출력을 맡기고,
-          재료와 수령 방법을 한 번에 정하세요.
+          학교 메이커스페이스의 3D 프린터를 나만의 작은 공장으로 쓰세요.
+          수업 과제부터 창업 시제품까지, 만들고 싶은 것을 신청하면 캠퍼스에서 실물로 만들어 드립니다.
         </p>
       </div>
 
-      <!-- 3D 프린터가 한 층씩 쌓아 올리는 모습을 표현한 장식 -->
+      <!-- 아이디어가 한 층씩 쌓여 제품이 되는 모습을 표현한 장식 -->
       <div class="layer-stack" aria-hidden="true">
         <span></span><span></span><span></span><span></span>
         <span></span><span></span><span></span><span></span>
@@ -46,7 +46,7 @@
       <a href="#features">주요 기능</a>
       <a href="#materials">재료 안내</a>
       <a href="#steps">이용 방법</a>
-      <a href="#print-request">출력 신청</a>
+      <a href="#print-request">제작 신청</a>
       <a href="#subscribe">완료 알림 받기</a>
     </nav>
   </header>
@@ -57,15 +57,18 @@
       <h2>서비스 소개</h2>
       <div class="about-layout">
         <div class="about-text">
-          <h3>출력 신청을 줄 서지 않고 온라인으로</h3>
+          <h3>학교는 배우는 곳이자, 만드는 곳</h3>
           <p>
-            메이커스페이스에 직접 찾아가 신청서를 쓰지 않아도 됩니다.
-            출력물 이름과 재료, 받을 방법만 정하면 출력 대기 목록에 올라갑니다.
+            시제품 하나를 외부 업체에 맡기면 견적을 받고 기다리는 데만 며칠이 걸립니다.
+            내만세는 이미 학교에 있는 메이커스페이스 장비를 학생 누구나 쉽게 신청해 쓰도록 연결합니다.
           </p>
-          <p>출력이 끝나면 사물함에 보관하거나 원하는 날 직접 받아 갈 수 있습니다.</p>
+          <p>
+            강의실에서 떠올린 아이디어를 캠퍼스에서 바로 실물로 만들고,
+            써 보고, 고쳐서 다시 만들어 보세요. 내가 만드는 세상은 그렇게 시작됩니다.
+          </p>
         </div>
         <img class="service-image" src="assets/images/service.svg"
-             alt="3D 프린터 노즐이 부품을 한 층씩 쌓아 올리는 그림">
+             alt="3D 프린터 노즐이 학생의 시제품을 한 층씩 쌓아 올리는 그림">
       </div>
     </section>
 
@@ -74,16 +77,16 @@
       <h2>주요 기능</h2>
       <ul class="features-list">
         <li class="feature-card">
-          <h3>온라인 출력 신청</h3>
-          <p>모델 이름만 적으면 출력 대기 목록에 등록됩니다.</p>
+          <h3>아이디어를 시제품으로</h3>
+          <p>만들 것의 이름과 용도만 적으면 캠퍼스 제작 대기 목록에 올라갑니다.</p>
         </li>
         <li class="feature-card">
-          <h3>재료 직접 선택</h3>
-          <p>PLA·TPU·레진 중 용도에 맞는 재료를 고릅니다.</p>
+          <h3>용도에 맞는 재료 선택</h3>
+          <p>단단한 모형, 말랑한 부품, 정밀한 피규어까지 재료를 직접 고릅니다.</p>
         </li>
         <li class="feature-card">
-          <h3>수령 방법 선택</h3>
-          <p>사물함 보관과 직접 수령 중 편한 방법을 고릅니다.</p>
+          <h3>내 일정에 맞춘 수령</h3>
+          <p>사물함에 보관해 두거나 원하는 날 직접 찾아갑니다.</p>
         </li>
       </ul>
     </section>
@@ -92,7 +95,7 @@
     <section id="materials" class="content-section">
       <h2>재료 안내</h2>
 
-      <div class="tabs" role="tablist" aria-label="출력 재료 선택">
+      <div class="tabs" role="tablist" aria-label="제작 재료 선택">
         <button id="tab-pla" class="tab is-active" type="button"
           role="tab" aria-selected="true"
           aria-controls="panel-pla" data-target="#panel-pla">
@@ -111,18 +114,18 @@
       </div>
 
       <div id="panel-pla" class="panel is-active" role="tabpanel" aria-labelledby="tab-pla">
-        <h3>PLA · 가장 무난한 기본 재료</h3>
-        <p>단단하고 출력 실패가 적어 시제품, 모형, 과제 결과물에 알맞습니다. 대부분 하루 안에 출력됩니다.</p>
+        <h3>PLA · 첫 시제품에 알맞은 기본 재료</h3>
+        <p>단단하고 실패가 적어 모형, 과제 결과물, 창업 아이템의 첫 시제품에 알맞습니다. 대부분 하루 안에 완성됩니다.</p>
       </div>
 
       <div id="panel-tpu" class="panel" role="tabpanel" aria-labelledby="tab-tpu" hidden>
         <h3>TPU · 휘어지는 고무 같은 재료</h3>
-        <p>케이스 범퍼, 패킹, 손잡이 덮개처럼 말랑해야 하는 부품에 씁니다. 출력 속도가 느려 하루가 더 걸릴 수 있습니다.</p>
+        <p>케이스 범퍼, 패킹, 손잡이 덮개처럼 말랑해야 하는 부품에 씁니다. 제작 속도가 느려 하루가 더 걸릴 수 있습니다.</p>
       </div>
 
       <div id="panel-resin" class="panel" role="tabpanel" aria-labelledby="tab-resin" hidden>
         <h3>레진 · 표면이 매끈한 정밀 재료</h3>
-        <p>피규어나 작은 정밀 부품에 알맞습니다. 세척과 경화 후처리가 필요해 하루가 더 걸립니다.</p>
+        <p>피규어, 굿즈 샘플, 작은 정밀 부품에 알맞습니다. 세척과 경화 후처리가 필요해 하루가 더 걸립니다.</p>
       </div>
     </section>
 
@@ -130,52 +133,61 @@
     <section id="steps" class="content-section">
       <h2>이용 방법</h2>
       <ol class="steps-list">
-        <li>출력실 안전 수칙을 확인합니다.</li>
-        <li>출력물 이름, 재료, 수령 방법을 입력해 신청합니다.</li>
-        <li>완료 알림을 받으면 사물함이나 출력실에서 출력물을 받습니다.</li>
+        <li>메이커스페이스 안전 수칙을 확인합니다.</li>
+        <li>만들 것의 이름과 용도, 재료, 수령 방법을 정해 제작을 신청합니다.</li>
+        <li>완료 알림을 받으면 사물함이나 메이커스페이스에서 결과물을 받습니다.</li>
       </ol>
     </section>
 
     <!-- 6주차(체크박스·글자 수) + 7주차(사용자 흐름) -->
     <section id="print-request" class="content-section">
-      <h2>출력 신청</h2>
+      <h2>제작 신청</h2>
 
       <div class="interaction-item">
         <label class="agree-row" for="agreeCheck">
           <input id="agreeCheck" type="checkbox">
-          출력실 안전 수칙을 확인했습니다. (출력 중 노즐을 만지지 않기, 완성품은 식은 뒤 받기)
+          메이커스페이스 안전 수칙을 확인했습니다. (작동 중인 노즐을 만지지 않기, 결과물은 식은 뒤 받기)
         </label>
 
         <p id="agreeMessage" aria-live="polite">
-          안전 수칙을 확인해야 출력 신청을 시작할 수 있습니다.
+          안전 수칙을 확인해야 제작 신청을 시작할 수 있습니다.
         </p>
 
         <button id="startButton" class="primary-button" type="button" disabled>
-          출력 신청 시작하기
+          제작 신청 시작하기
         </button>
       </div>
 
-      <!-- 7주차: 출력 신청 흐름 (진입 → 입력 → 선택 → 확인 → 완료) -->
+      <!-- 7주차: 제작 신청 흐름 (진입 → 입력 → 선택 → 확인 → 완료) -->
       <section id="printFlow" class="print-flow" hidden aria-labelledby="printFlowTitle">
-        <h3 id="printFlowTitle" class="flow-title">출력 신청서</h3>
+        <h3 id="printFlowTitle" class="flow-title">제작 신청서</h3>
 
         <ol class="flow-steps" aria-hidden="true">
-          <li data-step="1">출력물 정보</li>
+          <li data-step="1">만들 것</li>
           <li data-step="2">재료·수령</li>
           <li data-step="3">내용 확인</li>
           <li data-step="4">완료</li>
         </ol>
-        <p id="printProgress" class="flow-progress" aria-live="polite">1 / 3 · 출력물 정보</p>
+        <p id="printProgress" class="flow-progress" aria-live="polite">1 / 3 · 만들 것</p>
 
         <!-- 1단계: 입력 -->
         <div class="print-step" data-step="1">
-          <h4>무엇을 출력할까요?</h4>
+          <h4>무엇을 만들까요?</h4>
 
-          <label for="modelName">출력물 이름</label>
-          <p class="field-help" id="modelHelp">무엇인지 알아볼 수 있게 적어 주세요. 예: 졸업작품 손잡이 부품</p>
+          <label for="modelName">만들 것 이름</label>
+          <p class="field-help" id="modelHelp">무엇인지 알아볼 수 있게 적어 주세요. 예: 접이식 휴대폰 거치대 시제품</p>
           <input id="modelName" type="text" maxlength="30"
                  aria-describedby="modelHelp modelError">
           <p id="modelError" class="field-error" role="alert"></p>
+
+          <label for="purpose">제작 용도</label>
+          <select id="purpose" aria-describedby="purposeError">
+            <option value="">용도를 골라 주세요</option>
+            <option value="class">수업 과제</option>
+            <option value="contest">동아리·공모전</option>
+            <option value="startup">창업 시제품</option>
+          </select>
+          <p id="purposeError" class="field-error" role="alert"></p>
 
           <label for="requesterName">신청자 이름</label>
           <input id="requesterName" type="text" maxlength="10"
@@ -196,14 +208,14 @@
           <select id="material" aria-describedby="materialHelp">
             <option value="pla">PLA · 기본</option>
             <option value="tpu">TPU · 말랑한 재료</option>
-            <option value="resin">레진 · 정밀 출력</option>
+            <option value="resin">레진 · 정밀 제작</option>
           </select>
-          <p id="materialHelp" class="field-help" aria-live="polite">대부분 하루 안에 출력됩니다.</p>
+          <p id="materialHelp" class="field-help" aria-live="polite">대부분 하루 안에 완성됩니다.</p>
 
           <label for="pickup">수령 방법</label>
           <select id="pickup">
             <option value="locker">사물함 보관 · 아무 때나 찾아가기</option>
-            <option value="visit">직접 수령 · 출력실 방문</option>
+            <option value="visit">직접 수령 · 메이커스페이스 방문</option>
           </select>
 
           <div id="visitDateField" hidden>
@@ -213,7 +225,7 @@
           </div>
 
           <div class="step-actions">
-            <button id="printBack2" class="secondary-button" type="button">출력물 정보 수정하기</button>
+            <button id="printBack2" class="secondary-button" type="button">만들 것 정보 수정하기</button>
             <button id="printNext2" class="primary-button" type="button">신청 내용 확인하기</button>
           </div>
         </div>
@@ -225,25 +237,26 @@
 
           <div class="step-actions">
             <button id="printBack3" class="secondary-button" type="button">재료·수령 방법 수정하기</button>
-            <button id="printSubmit" class="primary-button" type="button">출력 신청하기</button>
+            <button id="printSubmit" class="primary-button" type="button">제작 신청하기</button>
           </div>
         </div>
 
         <!-- 4단계: 완료 -->
         <div class="print-step print-done" data-step="4" hidden>
-          <h4 id="doneTitle" tabindex="-1">출력 신청이 접수되었습니다</h4>
+          <h4 id="doneTitle" tabindex="-1">제작 신청이 접수되었습니다</h4>
           <p>접수 번호 <strong id="printTicket"></strong></p>
           <p id="doneGuide"></p>
+          <p id="purposeGuide"></p>
 
           <div class="step-actions">
-            <button id="printRestart" class="secondary-button" type="button">다른 출력물 신청하기</button>
+            <button id="printRestart" class="secondary-button" type="button">다른 것 만들기</button>
           </div>
         </div>
 
         <!-- 확인 팝업: 취소하면 입력값 유지 -->
         <dialog id="confirmDialog" aria-labelledby="confirmTitle">
-          <h4 id="confirmTitle">이대로 출력을 신청할까요?</h4>
-          <p>신청 후에는 출력 대기 목록에 바로 올라갑니다.</p>
+          <h4 id="confirmTitle">이대로 제작을 신청할까요?</h4>
+          <p>신청 후에는 캠퍼스 제작 대기 목록에 바로 올라갑니다.</p>
           <div class="step-actions">
             <button id="confirmCancel" class="secondary-button" type="button">다시 확인하기</button>
             <button id="confirmOk" class="primary-button" type="button">신청 확정</button>
@@ -254,7 +267,7 @@
 
     <!-- 2·3·5주차: 완료 알림 받기 (submit) -->
     <section id="subscribe" class="content-section subscribe-section">
-      <h2>출력 완료 알림 받기</h2>
+      <h2>제작 완료 알림 받기</h2>
       <form id="subscribe-form" class="subscribe-form" novalidate>
         <label class="email-field" for="email">
           알림 받을 이메일
@@ -263,12 +276,12 @@
         </label>
         <button id="subscribeButton" class="primary-button" type="submit">완료 알림 신청하기</button>
       </form>
-      <p id="subscribeMessage" aria-live="polite">출력이 끝나면 이메일로 알려 드립니다.</p>
+      <p id="subscribeMessage" aria-live="polite">결과물이 완성되면 이메일로 알려 드립니다.</p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 레이어랩, 캠퍼스 메이커스페이스 출력 신청</p>
+    <p>© 2026 내만세, 내가 만드는 세상</p>
   </footer>
 
   <script src="script.js"></script>

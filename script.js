@@ -1,6 +1,6 @@
 /* =========================================================
-   레이어랩 script.js
-   순서: 5주차(알림 신청) → 6주차(테마·탭·안전 수칙) → 7주차(출력 신청 흐름)
+   내만세(내가 만드는 세상) script.js
+   순서: 5주차(알림 신청) → 6주차(테마·탭·안전 수칙) → 7주차(제작 신청 흐름)
    ========================================================= */
 
 /* ---------------------------------------------------------
@@ -34,7 +34,7 @@ function handleSubscribe(event) {
   }
 
   // 성공: 문구 + 스타일 + 버튼 상태를 함께 바꿉니다.
-  subscribeMessage.textContent = email + "(으)로 출력 완료 알림을 보내 드립니다.";
+  subscribeMessage.textContent = email + "(으)로 제작 완료 알림을 보내 드립니다.";
   subscribeMessage.classList.remove("is-error");
   subscribeMessage.classList.add("is-saved");
   emailInput.classList.remove("has-error");
@@ -111,8 +111,8 @@ function handleAgreeChange() {
 
   startButton.disabled = !agreed;
   agreeMessage.textContent = agreed
-    ? "확인했습니다. 출력 신청을 시작할 수 있습니다."
-    : "안전 수칙을 확인해야 출력 신청을 시작할 수 있습니다.";
+    ? "확인했습니다. 제작 신청을 시작할 수 있습니다."
+    : "안전 수칙을 확인해야 제작 신청을 시작할 수 있습니다.";
   agreeMessage.classList.toggle("is-ready", agreed);
 }
 
@@ -120,8 +120,8 @@ agreeCheck.addEventListener("change", handleAgreeChange);
 
 
 /* ---------------------------------------------------------
-   7주차 · 출력 신청 흐름
-   진입 → 1 출력물 정보 → 2 재료·수령 → 3 내용 확인 → (팝업) → 4 완료
+   7주차 · 제작 신청 흐름
+   진입 → 1 만들 것 → 2 재료·수령 → 3 내용 확인 → (팝업) → 4 완료
    --------------------------------------------------------- */
 
 // 1) 흐름에서 쓰는 요소 찾기
@@ -135,6 +135,8 @@ const modelError = document.querySelector("#modelError");
 const requesterName = document.querySelector("#requesterName");
 const nameCount = document.querySelector("#nameCount");
 const nameError = document.querySelector("#nameError");
+const purpose = document.querySelector("#purpose");
+const purposeError = document.querySelector("#purposeError");
 
 const material = document.querySelector("#material");
 const materialHelp = document.querySelector("#materialHelp");
@@ -148,12 +150,19 @@ const confirmDialog = document.querySelector("#confirmDialog");
 const printTicket = document.querySelector("#printTicket");
 const doneGuide = document.querySelector("#doneGuide");
 const doneTitle = document.querySelector("#doneTitle");
+const purposeGuide = document.querySelector("#purposeGuide");
 
-const stepNames = ["출력물 정보", "재료·수령 방법", "신청 내용 확인"];
+const stepNames = ["만들 것", "재료·수령 방법", "신청 내용 확인"];
+
+const purposeGuides = {
+  class: "결과물을 받으면 과제 제출 전에 크기와 맞물림을 한 번 더 확인해 보세요.",
+  contest: "팀원과 결과물을 함께 써 보고, 고칠 점이 생기면 같은 이름으로 다시 신청하세요.",
+  startup: "시제품을 주변 사람 다섯 명에게 써 보게 하고 반응을 기록해 보세요. 다음 버전의 출발점이 됩니다."
+};
 
 const materialGuides = {
-  pla: "대부분 하루 안에 출력됩니다.",
-  tpu: "출력 속도가 느려 하루가 더 걸릴 수 있습니다.",
+  pla: "대부분 하루 안에 완성됩니다.",
+  tpu: "제작 속도가 느려 하루가 더 걸릴 수 있습니다.",
   resin: "세척·경화 후처리 때문에 하루가 더 걸립니다."
 };
 
@@ -219,17 +228,29 @@ function handleModelInput() {
 }
 
 requesterName.addEventListener("input", handleNameInput);
+purpose.addEventListener("change", function () {
+  if (purpose.value !== "") {
+    clearError(purpose, purposeError);
+  }
+});
 modelName.addEventListener("input", handleModelInput);
 
 // 6) 1단계 → 2단계: 필수값 검사
 function handleNext1() {
   const modelMissing = modelName.value.trim() === "";
+  const purposeMissing = purpose.value === "";
   const nameMissing = requesterName.value.trim() === "";
 
   if (modelMissing) {
-    showError(modelName, modelError, "출력물 이름을 입력해 주세요. 예: 졸업작품 손잡이 부품");
+    showError(modelName, modelError, "만들 것 이름을 입력해 주세요. 예: 접이식 휴대폰 거치대 시제품");
   } else {
     clearError(modelName, modelError);
+  }
+
+  if (purposeMissing) {
+    showError(purpose, purposeError, "제작 용도를 골라 주세요.");
+  } else {
+    clearError(purpose, purposeError);
   }
 
   if (nameMissing) {
@@ -238,9 +259,15 @@ function handleNext1() {
     clearError(requesterName, nameError);
   }
 
-  if (modelMissing || nameMissing) {
+  if (modelMissing || purposeMissing || nameMissing) {
     // 고쳐야 할 첫 입력창으로 이동하고 현재 단계에 머뭅니다.
-    (modelMissing ? modelName : requesterName).focus();
+    if (modelMissing) {
+      modelName.focus();
+    } else if (purposeMissing) {
+      purpose.focus();
+    } else {
+      requesterName.focus();
+    }
     return;
   }
 
@@ -278,7 +305,7 @@ visitDate.addEventListener("change", function () {
 function handleNext2() {
   if (pickup.value === "visit") {
     if (visitDate.value === "") {
-      showError(visitDate, dateError, "출력물을 받으러 올 날짜를 골라 주세요.");
+      showError(visitDate, dateError, "결과물을 받으러 올 날짜를 골라 주세요.");
       visitDate.focus();
       return;
     }
@@ -313,7 +340,8 @@ function getPickupText() {
 
 function showSummary() {
   printSummary.textContent = "";
-  addSummaryRow("출력물", modelName.value.trim());
+  addSummaryRow("만들 것", modelName.value.trim());
+  addSummaryRow("제작 용도", purpose.options[purpose.selectedIndex].text);
   addSummaryRow("신청자", requesterName.value.trim());
   addSummaryRow("재료", material.options[material.selectedIndex].text);
   addSummaryRow("수령 방법", getPickupText());
@@ -344,11 +372,14 @@ function handleConfirmOk() {
   confirmDialog.close();
 
   const ticketNumber = Math.floor(1000 + Math.random() * 9000);
-  printTicket.textContent = "LL-" + ticketNumber;
+  printTicket.textContent = "NM-" + ticketNumber;
 
   doneGuide.textContent = pickup.value === "visit"
-    ? visitDate.value + "에 학생증을 들고 메이커스페이스 출력실로 오세요."
-    : "출력이 끝나면 사물함 번호와 비밀번호를 이메일로 보내 드립니다.";
+    ? visitDate.value + "에 학생증을 들고 메이커스페이스로 오세요."
+    : "완성되면 사물함 번호와 비밀번호를 이메일로 보내 드립니다.";
+
+  // 제작 용도에 따라 다음 행동을 다르게 안내합니다.
+  purposeGuide.textContent = purposeGuides[purpose.value];
 
   showStep(4);
   doneTitle.focus();
@@ -359,6 +390,7 @@ document.querySelector("#confirmOk").addEventListener("click", handleConfirmOk);
 // 12) 다시 시작: 입력·선택·오류·진행 상태를 모두 처음으로
 function handleRestart() {
   modelName.value = "";
+  purpose.value = "";
   requesterName.value = "";
   nameCount.textContent = "0 / 10";
 
@@ -369,12 +401,14 @@ function handleRestart() {
   visitDateField.hidden = true;
 
   clearError(modelName, modelError);
+  clearError(purpose, purposeError);
   clearError(requesterName, nameError);
   clearError(visitDate, dateError);
 
   printSummary.textContent = "";
   printTicket.textContent = "";
   doneGuide.textContent = "";
+  purposeGuide.textContent = "";
 
   showStep(1);
   modelName.focus();
