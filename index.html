@@ -181,7 +181,7 @@
 
           <label for="purpose">제작 용도</label>
           <select id="purpose" aria-describedby="purposeError">
-            <option value="">용도를 골라 주세요</option>
+            <option value="">용도를 선택해 주세요</option>
             <option value="class">수업 과제</option>
             <option value="contest">동아리·공모전</option>
             <option value="startup">창업 시제품</option>
@@ -199,7 +199,7 @@
           </div>
         </div>
 
-        <!-- 2단계: 선택 (조건부 입력 포함) -->
+        <!-- 2단계: 선택  -->
         <div class="print-step" data-step="2" hidden>
           <h4>재료와 받을 방법을 골라 주세요</h4>
 
@@ -209,12 +209,12 @@
             <option value="tpu">TPU · 말랑한 재료</option>
             <option value="resin">레진 · 정밀 제작</option>
           </select>
-          <p id="materialHelp" class="field-help" aria-live="polite">대부분 하루 안에 완성됩니다.</p>
+          <p id="materialHelp" class="field-help" aria-live="polite">재료에 따라 제작 시간이 달라질 수 있습니다.</p>
 
           <label for="pickup">수령 방법</label>
           <select id="pickup">
             <option value="locker">사물함 보관 · 아무 때나 찾아가기</option>
-            <option value="visit">직접 수령 · 메이커스페이스 방문</option>
+            <option value="visit">직접 수령 · 방문</option>
           </select>
 
           <div id="visitDateField" hidden>
@@ -255,7 +255,7 @@
         <!-- 확인 팝업: 취소하면 입력값 유지 -->
         <dialog id="confirmDialog" aria-labelledby="confirmTitle">
           <h4 id="confirmTitle">이대로 제작을 신청할까요?</h4>
-          <p>신청 후에는 캠퍼스 제작 대기 목록에 바로 올라갑니다.</p>
+          <p>신청 후 제작 대기 목록에 바로 올라갑니다.</p>
           <div class="step-actions">
             <button id="confirmCancel" class="secondary-button" type="button">다시 확인하기</button>
             <button id="confirmOk" class="primary-button" type="button">신청 확정</button>
