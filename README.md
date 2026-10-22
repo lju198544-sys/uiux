@@ -70,4 +70,4 @@
 ## 배포 주소
 
 - GitHub 저장소: https://github.com/아이디/uiuxprogramming
-- 배포 웹페이지: https://아이디.github.io/uiuxprogramming/
+- 배포 웹페이지: https://아이디.github.io/uiux/
