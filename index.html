@@ -1,48 +1,276 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8">
-  <title>12606470-이정우</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>레이어랩 | 캠퍼스 3D 프린터 출력 신청</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <!-- 발표 불안 훈련 서비스.-->
-  <header>
-    <h1>발표 훈련 서비스</h1>
-    <p>반복적인 연습으로 발표 불안을 줄이고, 자신감을 기릅니다.</p>
+  <!--
+  사용자: 과제·작품용 출력물이 필요하지만 3D 프린터가 없는 대학생
+  목적: 학교 메이커스페이스 3D 프린터에 출력을 맡기는 방법과 조건을 이해한다.
+  핵심 행동: 안전 수칙을 확인하고 출력 신청을 시작부터 완료까지 마친다.
+  정보 순서: 서비스 소개 → 주요 기능 → 재료 안내 → 이용 방법 → 출력 신청 → 완료 알림 받기
+  -->
+
+  <header class="site-header">
+    <div class="header-top">
+      <p class="brand">레이어랩</p>
+      <button id="themeButton" class="theme-button" type="button" aria-pressed="false">
+        어두운 화면으로
+      </button>
+    </div>
+
+    <div class="header-layout">
+      <div class="header-text">
+        <h1>프린터가 없어도<br>내 모델은 출력된다</h1>
+        <p class="header-description">
+          학교 메이커스페이스의 3D 프린터에 출력을 맡기고,
+          재료와 수령 방법을 한 번에 정하세요.
+        </p>
+      </div>
+
+      <!-- 3D 프린터가 한 층씩 쌓아 올리는 모습을 표현한 장식 -->
+      <div class="layer-stack" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <nav class="site-nav" aria-label="주요 메뉴">
+      <a href="#about">서비스 소개</a>
+      <a href="#features">주요 기능</a>
+      <a href="#materials">재료 안내</a>
+      <a href="#steps">이용 방법</a>
+      <a href="#print-request">출력 신청</a>
+      <a href="#subscribe">완료 알림 받기</a>
+    </nav>
   </header>
 
-  <h2>서비스 소개</h2>
-  <h3>안전한 환경에서 반복하는 발표 연습</h3>
-  
-  <img src="assets/images/service.png" alt="닌텐도DS">
+  <main>
+    <!-- 2·3주차: 서비스 소개와 이미지 -->
+    <section id="about" class="content-section">
+      <h2>서비스 소개</h2>
+      <div class="about-layout">
+        <div class="about-text">
+          <h3>출력 신청을 줄 서지 않고 온라인으로</h3>
+          <p>
+            메이커스페이스에 직접 찾아가 신청서를 쓰지 않아도 됩니다.
+            출력물 이름과 재료, 받을 방법만 정하면 출력 대기 목록에 올라갑니다.
+          </p>
+          <p>출력이 끝나면 사물함에 보관하거나 원하는 날 직접 받아 갈 수 있습니다.</p>
+        </div>
+        <img class="service-image" src="assets/images/service.svg"
+             alt="3D 프린터 노즐이 부품을 한 층씩 쌓아 올리는 그림">
+      </div>
+    </section>
 
-  <h2>훈련 기능</h2>
-  <ul>
-      <li>
-          <h3>단계별 발표 연습</h3>
-          <p>연습한 발표 상황을 선택하고 반복해서 연습합니다. </p>
-      </li>
-      <li>
-          <h3>가상 청중 연습</h3>
-          <p>가상 청중 앞에서 실제 발표를 연습하고, 청중의 반응을 확인 합니다.</p>
-      </li>
-      <li>
-          <h3>발표 피드백</h3>
-          <p>발표 후,AI가 제공하는 피드백을 확인할 수 있습니다.</p>
-      </li>
-  </ul>
-    
-    <h2> 이용 방법 </h2>
-    
-    <ol>
-        <li>회원가입 및 로그인 합니다. </li>
-        <li>원하는 발표 주제를 선택 합니다. </li>
-        <li>단계별 발표 연습을 시작 합니다. </li>
-        <li>가상 청중앞에서 발표를 연습 합니다.</li>
-        <li>AI가 제공하는 피드백을 확인하고 개선합니다.</li>
-    </ol>
+    <!-- 2·3·4주차: 주요 기능 3개 (Grid 카드) -->
+    <section id="features" class="content-section">
+      <h2>주요 기능</h2>
+      <ul class="features-list">
+        <li class="feature-card">
+          <h3>온라인 출력 신청</h3>
+          <p>모델 이름만 적으면 출력 대기 목록에 등록됩니다.</p>
+        </li>
+        <li class="feature-card">
+          <h3>재료 직접 선택</h3>
+          <p>PLA·TPU·레진 중 용도에 맞는 재료를 고릅니다.</p>
+        </li>
+        <li class="feature-card">
+          <h3>수령 방법 선택</h3>
+          <p>사물함 보관과 직접 수령 중 편한 방법을 고릅니다.</p>
+        </li>
+      </ul>
+    </section>
 
+    <!-- 6주차: 탭 UI (재료 안내) -->
+    <section id="materials" class="content-section">
+      <h2>재료 안내</h2>
+
+      <div class="tabs" role="tablist" aria-label="출력 재료 선택">
+        <button id="tab-pla" class="tab is-active" type="button"
+          role="tab" aria-selected="true"
+          aria-controls="panel-pla" data-target="#panel-pla">
+          PLA
+        </button>
+        <button id="tab-tpu" class="tab" type="button"
+          role="tab" aria-selected="false"
+          aria-controls="panel-tpu" data-target="#panel-tpu">
+          TPU
+        </button>
+        <button id="tab-resin" class="tab" type="button"
+          role="tab" aria-selected="false"
+          aria-controls="panel-resin" data-target="#panel-resin">
+          레진
+        </button>
+      </div>
+
+      <div id="panel-pla" class="panel is-active" role="tabpanel" aria-labelledby="tab-pla">
+        <h3>PLA · 가장 무난한 기본 재료</h3>
+        <p>단단하고 출력 실패가 적어 시제품, 모형, 과제 결과물에 알맞습니다. 대부분 하루 안에 출력됩니다.</p>
+      </div>
+
+      <div id="panel-tpu" class="panel" role="tabpanel" aria-labelledby="tab-tpu" hidden>
+        <h3>TPU · 휘어지는 고무 같은 재료</h3>
+        <p>케이스 범퍼, 패킹, 손잡이 덮개처럼 말랑해야 하는 부품에 씁니다. 출력 속도가 느려 하루가 더 걸릴 수 있습니다.</p>
+      </div>
+
+      <div id="panel-resin" class="panel" role="tabpanel" aria-labelledby="tab-resin" hidden>
+        <h3>레진 · 표면이 매끈한 정밀 재료</h3>
+        <p>피규어나 작은 정밀 부품에 알맞습니다. 세척과 경화 후처리가 필요해 하루가 더 걸립니다.</p>
+      </div>
+    </section>
+
+    <!-- 2·3주차: 이용 방법 3단계 -->
+    <section id="steps" class="content-section">
+      <h2>이용 방법</h2>
+      <ol class="steps-list">
+        <li>출력실 안전 수칙을 확인합니다.</li>
+        <li>출력물 이름, 재료, 수령 방법을 입력해 신청합니다.</li>
+        <li>완료 알림을 받으면 사물함이나 출력실에서 출력물을 받습니다.</li>
+      </ol>
+    </section>
+
+    <!-- 6주차(체크박스·글자 수) + 7주차(사용자 흐름) -->
+    <section id="print-request" class="content-section">
+      <h2>출력 신청</h2>
+
+      <div class="interaction-item">
+        <label class="agree-row" for="agreeCheck">
+          <input id="agreeCheck" type="checkbox">
+          출력실 안전 수칙을 확인했습니다. (출력 중 노즐을 만지지 않기, 완성품은 식은 뒤 받기)
+        </label>
+
+        <p id="agreeMessage" aria-live="polite">
+          안전 수칙을 확인해야 출력 신청을 시작할 수 있습니다.
+        </p>
+
+        <button id="startButton" class="primary-button" type="button" disabled>
+          출력 신청 시작하기
+        </button>
+      </div>
+
+      <!-- 7주차: 출력 신청 흐름 (진입 → 입력 → 선택 → 확인 → 완료) -->
+      <section id="printFlow" class="print-flow" hidden aria-labelledby="printFlowTitle">
+        <h3 id="printFlowTitle" class="flow-title">출력 신청서</h3>
+
+        <ol class="flow-steps" aria-hidden="true">
+          <li data-step="1">출력물 정보</li>
+          <li data-step="2">재료·수령</li>
+          <li data-step="3">내용 확인</li>
+          <li data-step="4">완료</li>
+        </ol>
+        <p id="printProgress" class="flow-progress" aria-live="polite">1 / 3 · 출력물 정보</p>
+
+        <!-- 1단계: 입력 -->
+        <div class="print-step" data-step="1">
+          <h4>무엇을 출력할까요?</h4>
+
+          <label for="modelName">출력물 이름</label>
+          <p class="field-help" id="modelHelp">무엇인지 알아볼 수 있게 적어 주세요. 예: 졸업작품 손잡이 부품</p>
+          <input id="modelName" type="text" maxlength="30"
+                 aria-describedby="modelHelp modelError">
+          <p id="modelError" class="field-error" role="alert"></p>
+
+          <label for="requesterName">신청자 이름</label>
+          <input id="requesterName" type="text" maxlength="10"
+                 aria-describedby="nameCount nameError">
+          <p id="nameCount" class="char-count" aria-live="polite">0 / 10</p>
+          <p id="nameError" class="field-error" role="alert"></p>
+
+          <div class="step-actions">
+            <button id="printNext1" class="primary-button" type="button">재료와 수령 방법 고르기</button>
+          </div>
+        </div>
+
+        <!-- 2단계: 선택 (조건부 입력 포함) -->
+        <div class="print-step" data-step="2" hidden>
+          <h4>재료와 받을 방법을 골라 주세요</h4>
+
+          <label for="material">재료</label>
+          <select id="material" aria-describedby="materialHelp">
+            <option value="pla">PLA · 기본</option>
+            <option value="tpu">TPU · 말랑한 재료</option>
+            <option value="resin">레진 · 정밀 출력</option>
+          </select>
+          <p id="materialHelp" class="field-help" aria-live="polite">대부분 하루 안에 출력됩니다.</p>
+
+          <label for="pickup">수령 방법</label>
+          <select id="pickup">
+            <option value="locker">사물함 보관 · 아무 때나 찾아가기</option>
+            <option value="visit">직접 수령 · 출력실 방문</option>
+          </select>
+
+          <div id="visitDateField" hidden>
+            <label for="visitDate">방문 날짜</label>
+            <input id="visitDate" type="date" aria-describedby="dateError">
+            <p id="dateError" class="field-error" role="alert"></p>
+          </div>
+
+          <div class="step-actions">
+            <button id="printBack2" class="secondary-button" type="button">출력물 정보 수정하기</button>
+            <button id="printNext2" class="primary-button" type="button">신청 내용 확인하기</button>
+          </div>
+        </div>
+
+        <!-- 3단계: 확인 -->
+        <div class="print-step" data-step="3" hidden>
+          <h4>신청 내용을 확인해 주세요</h4>
+          <dl id="printSummary" class="summary-list"></dl>
+
+          <div class="step-actions">
+            <button id="printBack3" class="secondary-button" type="button">재료·수령 방법 수정하기</button>
+            <button id="printSubmit" class="primary-button" type="button">출력 신청하기</button>
+          </div>
+        </div>
+
+        <!-- 4단계: 완료 -->
+        <div class="print-step print-done" data-step="4" hidden>
+          <h4 id="doneTitle" tabindex="-1">출력 신청이 접수되었습니다</h4>
+          <p>접수 번호 <strong id="printTicket"></strong></p>
+          <p id="doneGuide"></p>
+
+          <div class="step-actions">
+            <button id="printRestart" class="secondary-button" type="button">다른 출력물 신청하기</button>
+          </div>
+        </div>
+
+        <!-- 확인 팝업: 취소하면 입력값 유지 -->
+        <dialog id="confirmDialog" aria-labelledby="confirmTitle">
+          <h4 id="confirmTitle">이대로 출력을 신청할까요?</h4>
+          <p>신청 후에는 출력 대기 목록에 바로 올라갑니다.</p>
+          <div class="step-actions">
+            <button id="confirmCancel" class="secondary-button" type="button">다시 확인하기</button>
+            <button id="confirmOk" class="primary-button" type="button">신청 확정</button>
+          </div>
+        </dialog>
+      </section>
+    </section>
+
+    <!-- 2·3·5주차: 완료 알림 받기 (submit) -->
+    <section id="subscribe" class="content-section subscribe-section">
+      <h2>출력 완료 알림 받기</h2>
+      <form id="subscribe-form" class="subscribe-form" novalidate>
+        <label class="email-field" for="email">
+          알림 받을 이메일
+          <input type="email" id="email" name="email" placeholder="name@example.com"
+                 aria-describedby="subscribeMessage">
+        </label>
+        <button id="subscribeButton" class="primary-button" type="submit">완료 알림 신청하기</button>
+      </form>
+      <p id="subscribeMessage" aria-live="polite">출력이 끝나면 이메일로 알려 드립니다.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 레이어랩, 캠퍼스 메이커스페이스 출력 신청</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

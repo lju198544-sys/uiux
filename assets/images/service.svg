@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="3D 프린터가 부품을 출력하는 그림">
+  <rect width="480" height="360" rx="20" fill="#e3f2f1"/>
+  <!-- 프린터 프레임 -->
+  <rect x="70" y="40" width="20" height="270" rx="4" fill="#1c2230"/>
+  <rect x="390" y="40" width="20" height="270" rx="4" fill="#1c2230"/>
+  <rect x="60" y="30" width="360" height="22" rx="6" fill="#1c2230"/>
+  <rect x="60" y="300" width="360" height="26" rx="6" fill="#1c2230"/>
+  <!-- 가로축과 노즐 -->
+  <rect x="90" y="108" width="300" height="10" rx="5" fill="#5a6273"/>
+  <rect x="246" y="94" width="56" height="44" rx="8" fill="#0b6e69"/>
+  <path d="M262 138 h24 l-8 18 h-8 z" fill="#1c2230"/>
+  <!-- 필라멘트 -->
+  <path d="M274 94 C 274 60, 330 60, 340 30" fill="none" stroke="#f0a020" stroke-width="5" stroke-linecap="round"/>
+  <!-- 베드 -->
+  <rect x="130" y="276" width="220" height="14" rx="4" fill="#0b6e69"/>
+  <!-- 쌓이는 출력물 (레이어) -->
+  <g fill="#f0a020">
+    <rect x="186" y="262" width="108" height="12" rx="3"/>
+    <rect x="192" y="248" width="96" height="12" rx="3" fill="#f5b94a"/>
+    <rect x="200" y="234" width="80" height="12" rx="3"/>
+    <rect x="206" y="220" width="68" height="12" rx="3" fill="#f5b94a"/>
+    <rect x="204" y="206" width="72" height="12" rx="3"/>
+    <rect x="212" y="192" width="56" height="12" rx="3" fill="#f5b94a"/>
+    <rect x="226" y="178" width="34" height="12" rx="3" opacity="0.55"/>
+  </g>
+  <!-- 노즐 열 -->
+  <circle cx="274" cy="164" r="4" fill="#f0a020"/>
+</svg>
